@@ -57,5 +57,4 @@ export function FesServer(config: Config, app?: Express, server?: Server) {
 }
 
 export * from './lib/config';
-export * as Mongoose from './lib/mongoose';
 export * from './lib/error';

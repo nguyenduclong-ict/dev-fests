@@ -1,13 +1,14 @@
 {
-  "name": "fests",
+  "name": "fests-dev",
   "version": "0.0.2",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/app.js",
-    "dev": "tsc -w & nodemon -q -w dist dist/app.js",
+    "test": "nodemon e2e/index.ts",
     "build": "rm -rf dist && tsc",
-    "build:watch": "tsc -w"
+    "build:watch": "tsc -w",
+    "build:prod": "./build.sh"
   },
   "author": "Nguyen Duc Long",
   "license": "ISC",

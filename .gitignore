@@ -31,3 +31,7 @@ Thumbs.db
 # Ignore package-lock.json  yarn.lock
 yarn.lock
 package-lock.json
+
+# Build directory
+dist/
+package/
