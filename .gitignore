@@ -28,10 +28,6 @@ bower_components
 .DS_Store
 Thumbs.db
 
-# Ignore built ts files
-dist/**/*
-
-# ignore yarn.lock
+# Ignore package-lock.json  yarn.lock
 yarn.lock
-
 package-lock.json

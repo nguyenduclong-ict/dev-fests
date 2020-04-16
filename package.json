@@ -6,9 +6,8 @@
   "scripts": {
     "start": "tsc && node dist/app.js",
     "dev": "tsc -w & nodemon -q -w dist dist/app.js",
-    "build": "tsc",
-    "build:watch": "tsc -w",
-    "push": "rm -rf dist && tsc && git push origin master"
+    "build": "rm -rf dist && tsc",
+    "build:watch": "tsc -w"
   },
   "author": "Nguyen Duc Long",
   "license": "ISC",
