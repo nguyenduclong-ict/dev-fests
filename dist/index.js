@@ -29,7 +29,9 @@ const express_1 = __importStar(require("express"));
 const http_1 = __importDefault(require("http"));
 const morgan_1 = __importDefault(require("morgan"));
 const error_1 = require("./lib/error");
-let _beforeStart, _app, _server;
+let _beforeStart;
+let _app;
+let _server;
 function start() {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
@@ -44,6 +46,7 @@ function start() {
             app.use(morgan_1.default('dev'));
             // use lib
             app.use(express_1.json());
+            app.use(express_1.urlencoded({ extended: true }));
             // init router
             yield router_1.initRoutes(app, path_1.default.join(config.dirroot, 'routes'));
             // handle Error
@@ -65,7 +68,7 @@ function FesServer(config, app, server) {
     _app = app || express_1.default();
     _server = server || http_1.default.createServer(app);
     config_1.setConfig(config);
-    Object.assign(process.env, config.env);
+    Object.assign(process.env, config_1.Config.env);
     return { beforeStart, start };
 }
 exports.FesServer = FesServer;

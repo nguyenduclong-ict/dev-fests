@@ -1,17 +1,21 @@
 declare class FesConfig {
     static config: Config;
     private constructor();
-    private static initDefaultConfig;
     static setConfig(config: Config): void;
     static get Config(): Config;
-    static set Config(v: Config);
 }
 export interface Config {
     dirroot: string;
-    env?: {
-        [x: string]: string | number;
-    };
-    database?: Array<MongodbConfig>;
+    env?: EnvConfig;
+    database?: MongodbConfig[];
+}
+interface EnvConfig {
+    PORT?: number;
+    BCRYPT_SALT_ROUNDS?: number;
+    JWT_SECRET?: string;
+    UPLOAD_PATH?: string;
+    NODE_ENV?: 'development' | 'production' | string;
+    [x: string]: string | number;
 }
 export interface MongodbConfig {
     type: 'mongo';

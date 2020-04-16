@@ -11,12 +11,13 @@ class FesError extends Error {
 exports.FesError = FesError;
 function handleFesError(err, req, res, next) {
     if (err instanceof FesError) {
-        console.log('FesError');
+        console.log('FesError', err);
         if (err.data) {
             return res.status(err.code).json(err.data);
         }
         return res.status(err.code).send(err.message);
     }
+    res.status(err.status || 500).send(err.message);
 }
 exports.handleFesError = handleFesError;
 //# sourceMappingURL=error.js.map

@@ -1,18 +1,18 @@
 import { setConfig, Config } from './lib/config';
 import { initRoutes } from './lib/router';
 import path from 'path';
-import express, { Express, json } from 'express';
+import express, { Express, json, urlencoded } from 'express';
 import http, { Server } from 'http';
 import logger from 'morgan';
-import { FesError, handleFesError } from './lib/error';
+import { handleFesError } from './lib/error';
 
 let _beforeStart: (
-    app: Express,
-    server: Server,
-    config?: Config
-  ) => Promise<any>,
-  _app,
-  _server;
+  app: Express,
+  server: Server,
+  config?: Config
+) => Promise<any>;
+let _app;
+let _server;
 
 async function start(): Promise<{ app?: Express; server?: Server }> {
   return new Promise(async (resolve) => {
@@ -27,6 +27,7 @@ async function start(): Promise<{ app?: Express; server?: Server }> {
     app.use(logger('dev'));
     // use lib
     app.use(json());
+    app.use(urlencoded({ extended: true }));
     // init router
     await initRoutes(app, path.join(config.dirroot, 'routes'));
     // handle Error
@@ -51,7 +52,7 @@ export function FesServer(config: Config, app?: Express, server?: Server) {
   _app = app || express();
   _server = server || http.createServer(app);
   setConfig(config);
-  Object.assign(process.env, config.env);
+  Object.assign(process.env, Config.env);
   return { beforeStart, start };
 }
 

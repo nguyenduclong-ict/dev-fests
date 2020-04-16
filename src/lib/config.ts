@@ -1,39 +1,49 @@
+const defaultConfig = {
+  dirroot: '',
+  env: {
+    PORT: 3000,
+    NODE_ENV: 'development',
+    UPLOAD_PATH: 'uploads',
+    BCRYPT_SALT_ROUNDS: 10,
+    JWT_SECRET: 'xztawer@~',
+  },
+  database: [],
+};
+
 class FesConfig {
   static config: Config;
-
   private constructor() {}
-  private static initDefaultConfig() {
-    FesConfig.config = {
-      dirroot: '',
-      env: {
-        PORT: 3000,
-        NODE_ENV: 'DEV',
-      },
-      database: [],
-    };
-  }
 
   static setConfig(config: Config) {
     if (!FesConfig.config) {
-      this.initDefaultConfig();
+      FesConfig.config = defaultConfig;
     }
+    config.env = { ...defaultConfig.env, ...config.env };
     Object.assign(FesConfig.config, config);
   }
 
   public static get Config(): Config {
     if (!FesConfig.config) {
-      this.initDefaultConfig();
+      FesConfig.config = defaultConfig;
     }
     return FesConfig.config;
   }
-
-  public static set Config(v: Config) {}
 }
 
 export interface Config {
   dirroot: string;
-  env?: { [x: string]: string | number };
-  database?: Array<MongodbConfig>;
+  env?: EnvConfig;
+  database?: MongodbConfig[];
+}
+
+interface EnvConfig {
+  PORT?: number;
+  BCRYPT_SALT_ROUNDS?: number;
+  JWT_SECRET?: string;
+  UPLOAD_PATH?: string;
+  NODE_ENV?: 'development' | 'production' | string;
+
+  [x: string]: string | number;
 }
 
 export interface MongodbConfig {
