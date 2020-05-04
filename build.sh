@@ -1,6 +1,6 @@
 #!/bin/bash
-rm -rf dist 
+rm -rf dist
 tsc
-shopt -s extglob 
+shopt -s extglob
 rm -rf package/!("package.json"|".git")
 cp -rf dist/* package

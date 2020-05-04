@@ -1,3 +1,5 @@
+import { assignObject } from './extra';
+
 const defaultConfig = {
   dirroot: '',
   env: {
@@ -18,8 +20,7 @@ class FesConfig {
     if (!FesConfig.config) {
       FesConfig.config = defaultConfig;
     }
-    config.env = { ...defaultConfig.env, ...config.env };
-    Object.assign(FesConfig.config, config);
+    assignObject(FesConfig.config, config);
   }
 
   public static get Config(): Config {
@@ -43,7 +44,7 @@ interface EnvConfig {
   UPLOAD_PATH?: string;
   NODE_ENV?: 'development' | 'production' | string;
 
-  [x: string]: string | number;
+  [x: string]: any;
 }
 
 export interface MongodbConfig {

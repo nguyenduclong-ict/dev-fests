@@ -1,26 +1,13 @@
-import { assignObject } from '../dist/extra';
+import { debounce, nowTime } from '../dist/extra';
+
+const f = debounce((key) => {
+  console.log('debounce', key, nowTime());
+}, 3000);
 
 function main() {
-  const a = {
-    info: {
-      name: 'Long',
-    },
-    student: {
-      id: '24260',
-    },
-  };
-  const b = {
-    info: {
-      age: 24,
-    },
-    student: {
-      classCode: '60PM1',
-    },
-  };
-
-  assignObject(a, b);
-
-  console.log(a);
+  console.log('main started', nowTime());
+  f();
+  f(10, { key: 10 });
 }
 
 main();

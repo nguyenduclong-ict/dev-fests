@@ -7,12 +7,12 @@ import logger from 'morgan';
 import { handleFesError } from './lib/error';
 
 let _beforeStart: (
-  app: Express,
-  server: Server,
-  config?: Config
+  Config?: Config,
+  app?: Express,
+  server?: Server
 ) => Promise<any>;
-let _app;
-let _server;
+let _app: Express;
+let _server: Server;
 
 async function start(): Promise<{ app?: Express; server?: Server }> {
   return new Promise(async (resolve) => {
@@ -21,7 +21,7 @@ async function start(): Promise<{ app?: Express; server?: Server }> {
     const server = _server;
     // run hook beforeStart
     if (_beforeStart) {
-      await _beforeStart(app, server, config);
+      await _beforeStart(config, app, server);
     }
     // for dev
     app.use(logger('dev'));
@@ -34,7 +34,7 @@ async function start(): Promise<{ app?: Express; server?: Server }> {
     app.use(handleFesError);
     // start server
     const port = Number(process.env.PORT);
-    app.listen(port, () => {
+    server.listen(port, () => {
       console.log('Server listen on port', port);
       resolve({ app, server });
     });
@@ -42,7 +42,7 @@ async function start(): Promise<{ app?: Express; server?: Server }> {
 }
 
 function beforeStart(
-  f: (app: Express, server: Server, config?: Config) => Promise<void>
+  f: (Config?: Config, app?: Express, server?: Server) => Promise<void>
 ) {
   _beforeStart = f;
   return { start };
