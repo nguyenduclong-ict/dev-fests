@@ -1,4 +1,5 @@
 import { Model, Document } from 'mongoose';
+
 import {
   GetOneFunction,
   GetManyFunction,
@@ -8,7 +9,8 @@ import {
   DeleteOneFunction,
   DeleteManyFunction,
   CreateOneFunction,
-} from './mogoose.declare';
+} from './declare';
+
 export class Provider {
   model: Model<Document, {}>;
 

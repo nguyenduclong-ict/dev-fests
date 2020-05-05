@@ -18,13 +18,18 @@
     "@types/node": "^13.11.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fesjs": "file:package",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "module-alias": "^2.2.2",
     "@types/express": "^4.17.6",
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
+  },
+  "_moduleAliases": {
+    "@lib": "src/lib"
   }
 }

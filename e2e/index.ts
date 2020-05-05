@@ -1,13 +1,13 @@
-import { debounce, nowTime } from '../dist/extra';
+import { IConfig, createServer } from '../package';
 
-const f = debounce((key) => {
-  console.log('debounce', key, nowTime());
-}, 3000);
+console.log(createServer);
+const config: IConfig = {
+  dirroot: __dirname,
+  env: {
+    PORT: 3002,
+  },
+};
 
-function main() {
-  console.log('main started', nowTime());
-  f();
-  f(10, { key: 10 });
-}
+const { app, server, start } = createServer(config);
 
-main();
+start();

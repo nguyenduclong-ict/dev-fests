@@ -12,7 +12,6 @@ export class FesError extends Error {
 
 export function handleFesError(err, req, res, next) {
   if (err instanceof FesError) {
-    console.log('FesError', err);
     if (err.data) {
       return res.status(err.code).json(err.data);
     }

@@ -1,0 +1,12 @@
+{
+  "name": "fesjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo test"
+  },
+  "author": "Nguyen Duc Long",
+  "license": "ISC"
+}
